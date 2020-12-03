@@ -11,6 +11,8 @@ use title::Title;
 use std::fs;
 use gotham::handler::HandlerResult;
 use crate::title::FetchedTitle;
+extern crate rustc_serialize;
+use rustc_serialize::json::{self, Json, ToJson};
 
 extern crate gotham;
 
@@ -46,9 +48,24 @@ pub async fn handler(state: State) -> HandlerResult {
     Ok((state, res))
 }
 
+pub async fn movies_handler(state: State) -> HandlerResult {
+    let titles = database::fetch().await.unwrap();
+    let encoded = json::encode(&titles.to_json()).unwrap();
+    let mime = mime::APPLICATION_JSON;
+    let mut res = create_response(&state, StatusCode::OK, mime, encoded);
+
+    {
+        let headers = res.headers_mut();
+        headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
+    };
+
+    Ok((state, res))
+}
+
 fn router() -> Router {
     build_simple_router(|route| {
         route.get("/").to_async(handler);
+        route.get("/movies").to_async(movies_handler);
     })
 }
 
