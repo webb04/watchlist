@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Watchlist</title>
+    <style>
+      h1,
+      h2,
+      h3 {
+        color: white;
+        margin: 0.5rem;
+      }
+
+      img {
+        width: 16vw;
+      }
+
+      body {
+        background: #6495ed;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
+        margin: 0.5rem;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      main {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100vw;
+        overflow: scroll;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Watchlist</h1>
+
+    <main>{{ MOVIES }}</main>
+  </body>
+</html>

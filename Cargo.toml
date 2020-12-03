@@ -1,0 +1,17 @@
+[package]
+name = "watchlist"
+version = "0.1.0"
+authors = ["webb04"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+postgres = "0.17.5"
+tokio = "0.2.22"
+tokio-postgres = "0.5.5"
+omdb = "0.2.1"
+gotham = "0.5.0"
+gotham_derive = "0.5.0"
+mime = "0.3.16"
+futures = "0.3"
