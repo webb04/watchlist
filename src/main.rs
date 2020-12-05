@@ -1,6 +1,9 @@
 mod database;
 mod search;
 mod title;
+extern crate rustc_serialize;
+extern crate gotham;
+use crate::title::FetchedTitle;
 use gotham::helpers::http::response::create_response;
 use gotham::hyper::header::CONTENT_TYPE;
 use gotham::hyper::StatusCode;
@@ -10,11 +13,9 @@ use gotham::state::State;
 use title::Title;
 use std::fs;
 use gotham::handler::HandlerResult;
-use crate::title::FetchedTitle;
-extern crate rustc_serialize;
-use rustc_serialize::json::{self, Json, ToJson};
+use rustc_serialize::json::{self, ToJson};
+use gotham::handler::assets::FileOptions;
 
-extern crate gotham;
 
 fn generate_view(title: FetchedTitle) -> String {
     let movie_template = fs::read_to_string("views/movie.html")
@@ -66,6 +67,13 @@ fn router() -> Router {
     build_simple_router(|route| {
         route.get("/").to_async(handler);
         route.get("/movies").to_async(movies_handler);
+
+        route.get("assets/*").to_dir(
+            FileOptions::new("assets")
+                .with_cache_control("no-cache")
+                .with_gzip(true)
+                .build(),
+        );
     })
 }
 

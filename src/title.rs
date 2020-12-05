@@ -1,6 +1,6 @@
 extern crate rustc_serialize;
 use std::collections::BTreeMap;
-use rustc_serialize::json::{self, Json, ToJson};
+use rustc_serialize::json::{Json, ToJson};
 
 pub struct Title {
     pub name: String,
