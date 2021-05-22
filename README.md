@@ -1,9 +1,6 @@
 ✅ Rust
 ✅ Gotham
-React
-MobX
-OMDB
-CSS Grid
+✅ React
 
 ### Running application
 
